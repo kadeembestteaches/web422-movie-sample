@@ -17,12 +17,12 @@ const movieSchmea = new Schema({
   },
   rating: {
     type : Number,
-    required : true
+    required : false
   },
 
   featured: {
     type : Boolean,
-    required : false
+    required : true
   },
   dateCreated : 
   {

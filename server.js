@@ -14,10 +14,11 @@ app.get("/movies",(req,res)=>{
  
 
     //localhost:3000/movies?featured=no
-    if(req.query.featured)
+    const result =req.query.featured;
+    if(result)
     {
 
-        movieModel.find({featured:false})
+        movieModel.find({featured: result==="yes" ? true : false})
         .then((movies)=>{
             res.json({
                 message : `A list of all the featurd movies`,
@@ -27,8 +28,10 @@ app.get("/movies",(req,res)=>{
     
         })
         .catch((err)=>{
-    
-    
+            res.status(500).json({
+                message : `Error ${err}`,
+            
+            })
         })
     }
 
@@ -46,20 +49,13 @@ app.get("/movies",(req,res)=>{
     
         })
         .catch((err)=>{
-    
-    
+            res.status(500).json({
+                message : `Error ${err}`,
+            
+            })
         })
     }
 
-
-
-    /*
-  
-
-    */
-    
-
-   
 
 })
 
@@ -72,8 +68,6 @@ app.get("/movies/:id",(req,res)=>{
 })
 
 app.post("/movies",(req,res)=>{
-
-  //ADD 
 
 
    const newMovie = new movieModel(req.body);
